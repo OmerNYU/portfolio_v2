@@ -1,13 +1,22 @@
-import shutil
+"""Copy certificate PDFs into public/certs and render compact PNG thumbs.
+
+Source PDFs are expected in assets/portfolio_certs (original names).
+If that folder is missing, re-renders thumbs from existing public/certs/*.pdf.
+"""
+
 from pathlib import Path
 
 import fitz
 
-src = Path(r"C:\Users\omerh\OneDrive\Desktop\Portfolio_Website\assets\portfolio_certs")
-pub = Path(r"C:\Users\omerh\OneDrive\Desktop\Portfolio_Website\public\certs")
+root = Path(__file__).resolve().parents[1]
+src = root / "assets" / "portfolio_certs"
+pub = root / "public" / "certs"
 thumbs = pub / "thumbs"
 pub.mkdir(parents=True, exist_ok=True)
 thumbs.mkdir(parents=True, exist_ok=True)
+
+# ~2x the on-page thumb (~160px) for retina clarity without huge files
+TARGET_WIDTH = 320
 
 certs = [
     {
@@ -52,22 +61,31 @@ certs = [
     },
 ]
 
+
+def render_thumb(pdf_path: Path, png_path: Path) -> tuple[int, int]:
+    doc = fitz.open(pdf_path)
+    page = doc[0]
+    zoom = TARGET_WIDTH / page.rect.width
+    pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), alpha=False)
+    pix.save(str(png_path))
+    size = (pix.width, pix.height)
+    doc.close()
+    return size
+
+
 for cert in certs:
+    slug = cert["slug"]
+    dest_pdf = pub / f"{slug}.pdf"
     src_pdf = src / cert["file"]
-    if not src_pdf.exists():
-        print("MISSING", cert["file"])
+
+    if src_pdf.exists():
+        dest_pdf.write_bytes(src_pdf.read_bytes())
+    elif not dest_pdf.exists():
+        print("MISSING", cert["file"], "and", dest_pdf.name)
         continue
 
-    dest_pdf = pub / f"{cert['slug']}.pdf"
-    shutil.copy2(src_pdf, dest_pdf)
-
-    doc = fitz.open(dest_pdf)
-    page = doc[0]
-    pix = page.get_pixmap(matrix=fitz.Matrix(2.0, 2.0), alpha=False)
-    png_path = thumbs / f"{cert['slug']}.png"
-    pix.save(str(png_path))
-    doc.close()
-    print("OK", cert["slug"], pix.width, "x", pix.height)
+    w, h = render_thumb(dest_pdf, thumbs / f"{slug}.png")
+    print("OK", slug, f"{w}x{h}")
 
 print(
     "DONE",

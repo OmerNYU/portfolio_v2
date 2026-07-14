@@ -154,9 +154,10 @@ export default function Experience() {
               <div className="cert-thumb">
                 <img
                   src={`/certs/thumbs/${cert.slug}.png`}
-                  alt={`${cert.title} certificate preview`}
-                  width={158}
-                  height={122}
+                  alt={`${cert.title} certificate from ${cert.issuer}`}
+                  width={160}
+                  height={124}
+                  loading="lazy"
                 />
               </div>
               <div>
