@@ -36,25 +36,42 @@ export default function Writing() {
       <section className="article-library">
         <h2>Articles</h2>
         <article>
-          <span>DEEP LEARNING</span>
-          <h3>Backpropagation from First Principles: What I Finally Understood</h3>
-          <p>A student-friendly walkthrough of the ideas beneath the notation.</p>
+          <span>ML SYSTEMS</span>
+          <h3>
+            Why Machine Learning Models Should Be Allowed to Say “I Don&apos;t Know”
+          </h3>
+          <p>
+            Confidence, calibration, abstention, and the case for human review
+            in real-world ML systems.
+          </p>
           <a
-            href="https://epoch.hashnode.dev/"
+            href="https://epoch.hashnode.dev/why-machine-learning-models-should-be-allowed-to-say-i-don-t-know"
             target="_blank"
             rel="noopener noreferrer"
           >
             Read on Hashnode ↗
           </a>
         </article>
-        <article className="coming-article">
+        <article>
+          <span>DEEP LEARNING</span>
+          <h3>Backpropagation from First Principles: What I Finally Understood</h3>
+          <p>A student-friendly walkthrough of the ideas beneath the notation.</p>
+          <a
+            href="https://epoch.hashnode.dev/backpropagation-from-first-principles"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Read on Hashnode ↗
+          </a>
+        </article>
+        <article className="coming-article" aria-label="Coming soon">
           <span>IN THE WORKS</span>
-          <h3>
-            Why Machine Learning Models Should Be Allowed to Say “I Don&apos;t Know”
-          </h3>
+          <h3>Coming soon</h3>
           <p>
-            Confidence, calibration, abstention, and the accuracy-coverage trade-off.
+            The next article is still taking shape. Check back here once it
+            ships.
           </p>
+          <b>Stay tuned</b>
         </article>
       </section>
       <Footer />
