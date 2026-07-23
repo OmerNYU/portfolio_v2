@@ -40,3 +40,13 @@ next-env.d.ts
 /.sites-runtime/
 /outputs/
 /work/
+
+# Nitro build output
+/.output/
+
+# General logs
+*.log
+
+# Local OS/editor files
+Thumbs.db
+.vscode/

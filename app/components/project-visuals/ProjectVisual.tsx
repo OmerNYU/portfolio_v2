@@ -6,6 +6,7 @@ import "./project-visuals.css";
 export type ProjectVisualKey =
   | "pitchmirror"
   | "repotriage"
+  | "failspec"
   | "kaboom"
   | "matchlens"
   | "tinyshell";
@@ -41,6 +42,7 @@ export function ProjectVisual({
       {project === "repotriage" && (
         <RepoTriageVisual idPrefix={idPrefix} />
       )}
+      {project === "failspec" && <FailSpecVisual idPrefix={idPrefix} />}
       {project === "kaboom" && <KaboomVisual idPrefix={idPrefix} />}
       {project === "matchlens" && (
         <MatchLensVisual idPrefix={idPrefix} />
@@ -330,6 +332,163 @@ function RepoTriageVisual({ idPrefix }: { idPrefix: string }) {
         <StatusChip x={206} y={386} label="CALIBRATED THRESHOLDS" />
         <StatusChip x={424} y={386} label="TF-IDF RETRIEVAL" />
         <StatusChip x={611} y={432} label="MAINTAINER FEEDBACK → POSTGRES" />
+      </g>
+    </svg>
+  );
+}
+
+function FailSpecVisual({ idPrefix }: { idPrefix: string }) {
+  const bg = `${idPrefix}-fail-bg`;
+  const glow = `${idPrefix}-fail-glow`;
+
+  return (
+    <svg
+      viewBox="0 0 900 520"
+      role="img"
+      aria-labelledby={`${idPrefix}-fail-title ${idPrefix}-fail-desc`}
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <title id={`${idPrefix}-fail-title`}>
+        FailSpec bug reproduction and regression testing pipeline
+      </title>
+      <desc id={`${idPrefix}-fail-desc`}>
+        A bug report enters an isolated Git worktree investigation, Codex forms
+        a reproduction hypothesis and generates a Playwright test, then
+        deterministic verification classifies the sanitized evidence.
+      </desc>
+
+      <defs>
+        <linearGradient id={bg} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#12090c" />
+          <stop offset="55%" stopColor="#1a0f12" />
+          <stop offset="100%" stopColor="#221218" />
+        </linearGradient>
+        <radialGradient id={glow}>
+          <stop offset="0%" stopColor="#fb7185" stopOpacity="0.28" />
+          <stop offset="100%" stopColor="#fb7185" stopOpacity="0" />
+        </radialGradient>
+      </defs>
+
+      <rect width="900" height="520" rx="34" fill={`url(#${bg})`} />
+      <circle cx="760" cy="90" r="220" fill={`url(#${glow})`} />
+      <GridLines opacity={0.11} />
+
+      <HeaderLabel
+        x={46}
+        y={48}
+        eyebrow="LOCAL-FIRST BUG REPRODUCTION"
+        title="FailSpec"
+        accent="#fb7185"
+      />
+
+      {/* Bug report panel */}
+      <g transform="translate(48 118)">
+        <rect width="250" height="236" rx="20" fill="#1a1014" stroke="#4a2a33" />
+        <circle cx="22" cy="22" r="5" fill="#ef4444" />
+        <circle cx="40" cy="22" r="5" fill="#f59e0b" />
+        <circle cx="58" cy="22" r="5" fill="#22c55e" />
+        <text x="78" y="27" className="pv-label">
+          BUG REPORT
+        </text>
+        <line x1="0" y1="42" x2="250" y2="42" stroke="#3a2430" strokeWidth="1" />
+        <rect x="18" y="58" width="168" height="10" rx="5" fill="#4a2f38" />
+        <rect x="18" y="80" width="204" height="10" rx="5" fill="#342028" />
+        <rect x="18" y="102" width="142" height="10" rx="5" fill="#342028" />
+        <rect x="18" y="124" width="186" height="10" rx="5" fill="#342028" />
+        <rect x="18" y="158" width="88" height="26" rx="13" fill="#3a1f28" />
+        <text x="32" y="176" className="pv-small" fill="#fda4af">
+          React / Next
+        </text>
+        <text x="18" y="214" className="pv-microcopy">
+          structured report + repo path
+        </text>
+      </g>
+
+      <path
+        d="M318 236H368"
+        stroke="#6b4a55"
+        strokeWidth="3"
+        strokeDasharray="8 8"
+      />
+      <circle cx="343" cy="236" r="5" fill="#fb7185" className="pv-pulse" />
+
+      {/* Hypothesis + worktree */}
+      <g transform="translate(368 118)">
+        <rect width="228" height="110" rx="18" fill="#1c1116" stroke="#4a2f38" />
+        <text x="16" y="28" className="pv-label">
+          HYPOTHESIS
+        </text>
+        <text x="16" y="54" className="pv-small">
+          Codex inspects worktree
+        </text>
+        <text x="16" y="76" className="pv-small">
+          forms reproduction plan
+        </text>
+        <text x="16" y="96" className="pv-microcopy">
+          isolated git worktree
+        </text>
+
+        <rect
+          y="126"
+          width="228"
+          height="110"
+          rx="18"
+          fill="#1c1116"
+          stroke="#4a2f38"
+        />
+        <text x="16" y="154" className="pv-label">
+          PLAYWRIGHT TEST
+        </text>
+        <text x="16" y="180" className="pv-small" fill="#fda4af">
+          test(&apos;repro checkout crash&apos;
+        </text>
+        <text x="16" y="202" className="pv-small" fill="#fda4af">
+          , async () =&gt; {"{"}…{"}"})
+        </text>
+        <text x="16" y="224" className="pv-microcopy">
+          constrained generated spec
+        </text>
+      </g>
+
+      <path
+        d="M616 236H666"
+        stroke="#6b4a55"
+        strokeWidth="3"
+        strokeDasharray="8 8"
+      />
+      <circle cx="641" cy="236" r="5" fill="#34d399" className="pv-pulse" />
+
+      {/* Verification result */}
+      <g transform="translate(666 118)">
+        <rect width="186" height="236" rx="20" fill="#141a16" stroke="#2f4a3a" />
+        <text x="16" y="30" className="pv-label">
+          VERDICT
+        </text>
+        <rect x="16" y="48" width="154" height="42" rx="12" fill="#163024" />
+        <circle cx="36" cy="69" r="7" fill="#34d399" />
+        <text x="52" y="74" className="pv-small" fill="#6ee7b7">
+          Verified
+        </text>
+        <text x="16" y="118" className="pv-microcopy">
+          partial evidence
+        </text>
+        <text x="16" y="140" className="pv-microcopy">
+          not reproduced
+        </text>
+        <text x="16" y="162" className="pv-microcopy">
+          execution error
+        </text>
+        <rect x="16" y="186" width="154" height="32" rx="10" fill="#1a2420" />
+        <text x="28" y="207" className="pv-small">
+          deterministic check
+        </text>
+      </g>
+
+      <g className="pv-detail">
+        <StatusChip x={48} y={392} label="CODEX ANALYSIS" />
+        <StatusChip x={214} y={392} label="ISOLATED WORKTREE" />
+        <StatusChip x={404} y={392} label="SANITIZED EVIDENCE" />
+        <StatusChip x={602} y={432} label="286 PASSING TESTS" />
       </g>
     </svg>
   );

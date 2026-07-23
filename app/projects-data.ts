@@ -1,6 +1,7 @@
 export type ProjectVisualKey =
   | "pitchmirror"
   | "repotriage"
+  | "failspec"
   | "kaboom"
   | "matchlens"
   | "tinyshell";
@@ -20,21 +21,6 @@ export function techLine(technologies: string[]) {
 
 export const featuredHomeProjects: ProjectCard[] = [
   {
-    name: "PitchMirror",
-    label: "AI · CLOUD · PRODUCT",
-    desc: "A multimodal presentation coach that turns recorded pitches into structured feedback on voice, presence, and content.",
-    technologies: [
-      "Next.js",
-      "Fastify",
-      "FFmpeg",
-      "AWS",
-      "Amazon Bedrock",
-      "Amazon Nova Pro",
-    ],
-    visualKey: "pitchmirror",
-    githubUrl: "https://github.com/OmerNYU/PitchMirror",
-  },
-  {
     name: "RepoTriage",
     label: "ML SYSTEMS · DEVELOPER TOOLS",
     desc: "A confidence-aware GitHub issue intelligence system that predicts labels, retrieves similar issues, abstains when uncertain, and records maintainer feedback.",
@@ -51,24 +37,24 @@ export const featuredHomeProjects: ProjectCard[] = [
     visualKey: "repotriage",
     githubUrl: "https://github.com/OmerNYU/repotriage",
   },
+  {
+    name: "FailSpec",
+    label: "OPENAI BUILD WEEK · DEVELOPER TOOLS",
+    desc: "Built by a three-person team during OpenAI Build Week 2026, FailSpec is a local-first developer tool that converts React and Next.js bug reports into evidence-backed Playwright regression tests.",
+    technologies: [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Express.js",
+      "Playwright",
+      "OpenAI Codex",
+    ],
+    visualKey: "failspec",
+    githubUrl: "https://github.com/OmerNYU/FailSpec",
+  },
 ];
 
 export const completedProjects: ProjectCard[] = [
-  {
-    name: "PitchMirror",
-    label: "AI product on AWS",
-    desc: "A multimodal presentation coach that turns recorded pitches into structured feedback on voice, presence, and content.",
-    technologies: [
-      "Next.js",
-      "Fastify",
-      "FFmpeg",
-      "AWS",
-      "Amazon Bedrock",
-      "Amazon Nova Pro",
-    ],
-    visualKey: "pitchmirror",
-    githubUrl: "https://github.com/OmerNYU/PitchMirror",
-  },
   {
     name: "RepoTriage",
     label: "ML system + developer tool",
@@ -85,6 +71,36 @@ export const completedProjects: ProjectCard[] = [
     ],
     visualKey: "repotriage",
     githubUrl: "https://github.com/OmerNYU/repotriage",
+  },
+  {
+    name: "FailSpec",
+    label: "AI developer tool · Build Week 2026",
+    desc: "Built by a three-person team during OpenAI Build Week 2026, FailSpec is a local-first developer tool that converts React and Next.js bug reports into evidence-backed Playwright regression tests.",
+    technologies: [
+      "TypeScript",
+      "React",
+      "Node.js",
+      "Express.js",
+      "Playwright",
+      "OpenAI Codex",
+    ],
+    visualKey: "failspec",
+    githubUrl: "https://github.com/OmerNYU/FailSpec",
+  },
+  {
+    name: "PitchMirror",
+    label: "AI product on AWS",
+    desc: "A multimodal presentation coach that turns recorded pitches into structured feedback on voice, presence, and content.",
+    technologies: [
+      "Next.js",
+      "Fastify",
+      "FFmpeg",
+      "AWS",
+      "Amazon Bedrock",
+      "Amazon Nova Pro",
+    ],
+    visualKey: "pitchmirror",
+    githubUrl: "https://github.com/OmerNYU/PitchMirror",
   },
   {
     name: "Kaboom",

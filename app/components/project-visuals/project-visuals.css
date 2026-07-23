@@ -118,6 +118,10 @@
   --project-accent: #2dd4bf;
 }
 
+.project-visual--failspec {
+  --project-accent: #fb7185;
+}
+
 .project-visual--kaboom {
   --project-accent: #fb923c;
 }
