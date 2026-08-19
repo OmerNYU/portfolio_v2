@@ -8,13 +8,6 @@ import {
   type ProjectCard,
 } from "./projects-data";
 
-const proofMetrics = [
-  ["90%+", "robot nav", "success"],
-  ["2,800+", "listings", "processed"],
-  ["286", "tests", "in FailSpec"],
-  ["500+", "subscribers", "The Epoch"],
-];
-
 const capabilityGroups = [
   [
     "Machine learning",
@@ -83,19 +76,6 @@ export default function Home() {
             </Link>
           </div>
         </div>
-      </section>
-
-      <section className="proof-strip" aria-label="Selected results">
-        {proofMetrics.map(([value, lineOne, lineTwo]) => (
-          <div className="proof-item" key={value}>
-            <strong>{value}</strong>
-            <span>
-              {lineOne}
-              <br />
-              {lineTwo}
-            </span>
-          </div>
-        ))}
       </section>
 
       <section className="section home-builds">
