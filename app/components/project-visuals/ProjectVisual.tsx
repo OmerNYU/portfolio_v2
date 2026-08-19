@@ -1,15 +1,10 @@
 "use client";
 
 import { useId } from "react";
+import type { ProjectVisualKey } from "../../projects-data";
 import "./project-visuals.css";
 
-export type ProjectVisualKey =
-  | "pitchmirror"
-  | "repotriage"
-  | "failspec"
-  | "kaboom"
-  | "matchlens"
-  | "tinyshell";
+export type { ProjectVisualKey };
 
 type ProjectVisualProps = {
   project: ProjectVisualKey;
@@ -36,6 +31,9 @@ export function ProjectVisual({
         .join(" ")}
       data-project={project}
     >
+      {project === "internshipmonitor" && (
+        <InternshipMonitorVisual idPrefix={idPrefix} />
+      )}
       {project === "pitchmirror" && (
         <PitchMirrorVisual idPrefix={idPrefix} />
       )}
@@ -51,6 +49,237 @@ export function ProjectVisual({
         <TinyShellVisual idPrefix={idPrefix} />
       )}
     </div>
+  );
+}
+
+function InternshipMonitorVisual({ idPrefix }: { idPrefix: string }) {
+  const bg = `${idPrefix}-im-bg`;
+  const glow = `${idPrefix}-im-glow`;
+  const gateFill = `${idPrefix}-im-gate`;
+
+  return (
+    <svg
+      viewBox="0 0 900 520"
+      role="img"
+      aria-labelledby={`${idPrefix}-im-title ${idPrefix}-im-desc`}
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <title id={`${idPrefix}-im-title`}>
+        Internship Monitor eligibility-first listing pipeline
+      </title>
+      <desc id={`${idPrefix}-im-desc`}>
+        Live Greenhouse and Lever listings are canonicalized, then a
+        deterministic eligibility gate evaluates role, geography, season,
+        graduation, language, and work authorization. An optional local
+        intelligence layer with Qwen, RAG, and tools supplements the gate
+        without overriding it. Provenance is stored in SQLite before alerts
+        are queued.
+      </desc>
+
+      <defs>
+        <linearGradient id={bg} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#07131c" />
+          <stop offset="55%" stopColor="#0b1824" />
+          <stop offset="100%" stopColor="#102033" />
+        </linearGradient>
+        <radialGradient id={glow}>
+          <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.26" />
+          <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
+        </radialGradient>
+        <linearGradient id={gateFill} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#123044" />
+          <stop offset="100%" stopColor="#0d2233" />
+        </linearGradient>
+      </defs>
+
+      <rect width="900" height="520" rx="34" fill={`url(#${bg})`} />
+      <circle cx="455" cy="210" r="210" fill={`url(#${glow})`} />
+      <GridLines opacity={0.1} />
+
+      <HeaderLabel
+        x={46}
+        y={42}
+        eyebrow="ELIGIBILITY-FIRST PIPELINE"
+        title="Internship Monitor"
+        accent="#38bdf8"
+      />
+
+      <g transform="translate(40 112)">
+        <rect width="148" height="86" rx="16" fill="#102433" stroke="#2b5870" />
+        <text x="16" y="28" className="pv-label">
+          GREENHOUSE
+        </text>
+        <text x="16" y="50" className="pv-microcopy">
+          live job boards
+        </text>
+        <text x="16" y="70" className="pv-small">
+          ATS feed
+        </text>
+
+        <rect
+          y="102"
+          width="148"
+          height="86"
+          rx="16"
+          fill="#102433"
+          stroke="#2b5870"
+        />
+        <text x="16" y="130" className="pv-label">
+          LEVER
+        </text>
+        <text x="16" y="152" className="pv-microcopy">
+          additional sources
+        </text>
+        <text x="16" y="172" className="pv-small">
+          15 sources total
+        </text>
+      </g>
+
+      <path
+        d="M188 205H226"
+        stroke="#3d6f88"
+        strokeWidth="3"
+        strokeDasharray="8 8"
+      />
+      <circle cx="207" cy="205" r="5" fill="#38bdf8" className="pv-pulse" />
+
+      <g transform="translate(226 148)">
+        <rect width="156" height="114" rx="18" fill="#122c3d" stroke="#3a6d86" />
+        <text x="16" y="30" className="pv-label">
+          CANONICAL
+        </text>
+        <text x="16" y="52" className="pv-label">
+          LISTINGS
+        </text>
+        <text x="16" y="80" className="pv-small">
+          normalized roles
+        </text>
+        <text x="16" y="100" className="pv-microcopy">
+          2,800+ live listings
+        </text>
+      </g>
+
+      <path
+        d="M382 205H418"
+        stroke="#3d6f88"
+        strokeWidth="3"
+      />
+      <circle cx="400" cy="205" r="5" fill="#38bdf8" className="pv-pulse" />
+
+      <g transform="translate(418 112)">
+        <rect
+          width="232"
+          height="228"
+          rx="20"
+          fill={`url(#${gateFill})`}
+          stroke="#38bdf8"
+          strokeWidth="2.2"
+        />
+        <text x="16" y="28" className="pv-label" fill="#7dd3fc">
+          DETERMINISTIC GATE
+        </text>
+        <text x="16" y="48" className="pv-microcopy">
+          hard eligibility · cannot skip
+        </text>
+        {[
+          ["role", "geo"],
+          ["season", "graduation"],
+          ["language", "work auth"],
+        ].map(([left, right], index) => (
+          <g key={left} transform={`translate(16 ${66 + index * 48})`}>
+            <rect width="96" height="34" rx="10" fill="#0a1c29" stroke="#2b5f78" />
+            <text x="48" y="22" textAnchor="middle" className="pv-small">
+              {left}
+            </text>
+            <rect
+              x="108"
+              width="96"
+              height="34"
+              rx="10"
+              fill="#0a1c29"
+              stroke="#2b5f78"
+            />
+            <text x="156" y="22" textAnchor="middle" className="pv-small">
+              {right}
+            </text>
+          </g>
+        ))}
+      </g>
+
+      <path
+        d="M534 340V348"
+        stroke="#64748b"
+        strokeWidth="2"
+        strokeDasharray="5 6"
+      />
+      <circle cx="534" cy="344" r="4" fill="#94a3b8" className="pv-pulse" />
+
+      <g transform="translate(418 348)">
+        <rect
+          width="232"
+          height="80"
+          rx="18"
+          fill="#101824"
+          stroke="#64748b"
+          strokeDasharray="6 5"
+        />
+        <text x="16" y="24" className="pv-label" fill="#cbd5e1">
+          LOCAL INTELLIGENCE
+        </text>
+        <text x="16" y="46" className="pv-small">
+          Qwen · RAG · tools
+        </text>
+        <text x="16" y="66" className="pv-microcopy">
+          optional · supplements, never overrides
+        </text>
+      </g>
+
+      <path
+        d="M650 205H686"
+        stroke="#3d6f88"
+        strokeWidth="3"
+      />
+      <circle cx="668" cy="205" r="5" fill="#38bdf8" className="pv-pulse" />
+
+      <g transform="translate(686 124)">
+        <rect width="174" height="108" rx="18" fill="#122c3d" stroke="#3a6d86" />
+        <text x="16" y="30" className="pv-label">
+          SQLITE +
+        </text>
+        <text x="16" y="52" className="pv-label">
+          PROVENANCE
+        </text>
+        <text x="16" y="80" className="pv-small">
+          state + audit trail
+        </text>
+      </g>
+
+      <path
+        d="M773 232V258"
+        stroke="#3d6f88"
+        strokeWidth="3"
+      />
+      <circle cx="773" cy="245" r="5" fill="#38bdf8" className="pv-pulse" />
+
+      <g transform="translate(686 258)">
+        <rect width="174" height="82" rx="18" fill="#143445" stroke="#38bdf8" />
+        <text x="16" y="32" className="pv-label">
+          ALERT QUEUE
+        </text>
+        <text x="16" y="56" className="pv-microcopy">
+          idempotent notifications
+        </text>
+      </g>
+
+      <g className="pv-detail">
+        <StatusChip x={40} y={438} label="15 SOURCES" />
+        <StatusChip x={178} y={438} label="2,800+ LISTINGS" />
+        <StatusChip x={348} y={438} label="70-CASE HUMAN REVIEW" />
+        <StatusChip x={568} y={438} label="221+ TESTS" />
+        <StatusChip x={40} y={476} label="BOUNDED RETRIES" />
+        <StatusChip x={214} y={476} label="IDEMPOTENT NOTIFICATIONS" />
+      </g>
+    </svg>
   );
 }
 

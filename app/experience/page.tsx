@@ -1,4 +1,4 @@
-import { Footer, Header, PageIntro } from "../components";
+import { Footer, Header, PageIntro, socialLinks } from "../components";
 
 const roles = [
   {
@@ -7,23 +7,20 @@ const roles = [
     company: "iCAS Lab, New York University Abu Dhabi",
     location: "Abu Dhabi, UAE",
     bullets: [
-      "Designed a resource-aware semantic-memory architecture for Unitree Go2 navigation, keeping continuous perception, memory updates, and safety validation deterministic while selectively invoking language models for higher-level reasoning.",
-      "Built a structured memory and query engine that aggregates object-location observations and resolves natural-language targets, including ambiguous matches, unavailable objects, and unsafe destinations.",
-      "Implemented a standalone ROS 2 Foxy pipeline that validates destinations against live occupancy grids and publishes map-frame PoseStamped goals for Nav2 integration.",
-      "Defined schema-validated interfaces and Dockerized evaluation tooling so perception, memory, query interpretation, and navigation could be tested and integrated independently.",
+      "Designed and implemented a modular semantic-navigation stack for the Unitree Go2, spanning semantic memory, natural-language target resolution, safety validation, and ROS 2/Nav2 goal publication.",
+      "Built a multimodal VLA training pipeline supporting generative SFT, NF4 QLoRA, official external splits, checkpoint/resume, prediction export, and provenance-preserving handoff into the lab's evaluation stack.",
+      "Integrated the navigation system into the lab’s ROS 2 stack; independent physical-robot testing achieved over 90% success across approximately 25 spoken-command trials, including chair and bag targets.",
     ],
-    tech: "ROS 2 · Python · Computer Vision · Navigation · Docker · LLM systems",
+    tech: "Python · ROS 2 · Nav2 · PyTorch · VLA · QLoRA · Docker",
   },
   {
-    dates: "May 2026 to Present",
-    title: "Adopt AI Fellow",
+    dates: "May 2026 to Jul. 2026",
+    title: "AdoptAI Fellow",
     company: "AdoptAI, The Lombard Hill Group",
     location: "Remote",
     bullets: [
-      "Built a reusable Excel framework for AI-adoption and economic assessment, automating three-year ROI, NPV, payback, break-even, and benefit-cost calculations across 12 role-based worksheets.",
-      "Collaborating on the redesign and development of AdoptAI's company website, translating business requirements into a clearer product narrative and modern user experience.",
+      "Built a reusable 12-sheet AI-adoption model using formulas and scripts to standardize three-year ROI, NPV, payback, break-even, and benefit-cost analyses for client engagements.",
     ],
-    tech: "AI strategy · Financial modelling · Product design · Web development",
   },
   {
     dates: "Feb. 2025 to Jun. 2025",
@@ -31,11 +28,10 @@ const roles = [
     company: "Enrichly, Techstars '23",
     location: "Abu Dhabi, UAE",
     bullets: [
-      "Designed responsive chatbot interfaces in Next.js, turning user feedback into iterative UI improvements, reusable components, and clearer conversational flows.",
-      "Fine-tuned a Hugging Face language model for the company's conversational use case and integrated it into the chatbot product workflow.",
-      "Evaluated responses for hallucinations, unsafe behaviour, and use-case alignment through structured prompt testing and failure analysis, informing revisions to training data, prompts, and safeguards.",
+      "Owned frontend engineering for an early production Next.js chatbot prototype in a three-intern team, building three core product flows and reusable UI foundations from scratch.",
+      "Reworked the chatbot into a site-wide voice-enabled assistant; integrated a Hugging Face model and built a 15-scenario evaluation harness that surfaced DSM-5 grounding errors and hallucinations, informing safeguards and product revisions.",
     ],
-    tech: "Next.js · TypeScript · Hugging Face · LLM evaluation · Frontend engineering",
+    tech: "Next.js · TypeScript · Hugging Face · LLM Evaluation · Frontend Engineering",
   },
   {
     dates: "Jul. 2023 to Aug. 2023",
@@ -43,73 +39,33 @@ const roles = [
     company: "CardPay, NIC LUMS",
     location: "Lahore, Pakistan",
     bullets: [
-      "Analysed customer and market data using Python, SQL, and Tableau to identify and prioritise high-potential SME prospects.",
-      "The analysis contributed to the acquisition of six new clients during the two-month internship.",
+      "Built a Python extraction, SQL-cleaning, and Tableau workflow to rank approximately 50 SMEs, replacing manual prospect research.",
+      "Six of the top ten recommendations became clients during the internship.",
     ],
-    tech: "Python · SQL · Tableau · Market analysis · Client acquisition",
+    tech: "Python · SQL · Tableau · Data Analysis",
   },
 ];
 
-const certifications = [
+const credentials = [
+  {
+    slug: "aws-ai-practitioner-udacity",
+    title: "AWS AI & ML Scholar",
+    issuer: "AWS / Udacity",
+    status: "Program",
+  },
   {
     slug: "coursera-ml-specialization",
     title: "Machine Learning Specialization",
     issuer: "DeepLearning.AI / Stanford Online",
     status: "Professional Certificate",
-  },
-  {
-    slug: "coursera-supervised-ml",
-    title: "Supervised Machine Learning: Regression and Classification",
-    issuer: "DeepLearning.AI / Stanford Online",
-    status: "Course Certificate",
-  },
-  {
-    slug: "coursera-advanced-learning-algorithms",
-    title: "Advanced Learning Algorithms",
-    issuer: "DeepLearning.AI / Stanford Online",
-    status: "Course Certificate",
-  },
-  {
-    slug: "coursera-unsupervised-learning",
-    title: "Unsupervised Learning, Recommenders, Reinforcement Learning",
-    issuer: "DeepLearning.AI / Stanford Online",
-    status: "Course Certificate",
+    href: "/certs/coursera-ml-specialization.pdf",
   },
   {
     slug: "google-data-analytics",
     title: "Google Data Analytics",
     issuer: "Google",
     status: "Professional Certificate",
-  },
-  {
-    slug: "aws-ai-practitioner-learning-plan",
-    title: "AWS Artificial Intelligence Practitioner Learning Plan",
-    issuer: "Amazon Web Services",
-    status: "Learning Plan",
-  },
-  {
-    slug: "aws-ai-practitioner-udacity",
-    title: "AWS AI Practitioner",
-    issuer: "AWS / Udacity",
-    status: "Course Certificate",
-  },
-  {
-    slug: "aws-developing-generative-ai-solutions",
-    title: "Developing Generative AI Solutions",
-    issuer: "Amazon Web Services",
-    status: "Course Certificate",
-  },
-  {
-    slug: "aws-developing-ml-solutions",
-    title: "Developing Machine Learning Solutions",
-    issuer: "Amazon Web Services",
-    status: "Course Certificate",
-  },
-  {
-    slug: "aws-essentials-of-prompt-engineering",
-    title: "Essentials of Prompt Engineering",
-    issuer: "Amazon Web Services",
-    status: "Course Certificate",
+    href: "/certs/google-data-analytics.pdf",
   },
 ];
 
@@ -134,41 +90,61 @@ export default function Experience() {
                     <li key={bullet}>{bullet}</li>
                   ))}
                 </ul>
-                <div className="role-tech">{role.tech}</div>
+                {role.tech ? <div className="role-tech">{role.tech}</div> : null}
               </div>
             </article>
           ))}
         </div>
       </section>
-      <section className="cert-section">
-        <h2>Certifications</h2>
+      <section className="cert-section compact-certs">
+        <h2>Selected credentials</h2>
         <div className="cert-grid">
-          {certifications.map((cert) => (
-            <a
-              className="cert-card"
-              key={cert.slug}
-              href={`/certs/${cert.slug}.pdf`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div className="cert-thumb">
-                <img
-                  src={`/certs/thumbs/${cert.slug}.png`}
-                  alt={`${cert.title} certificate from ${cert.issuer}`}
-                  width={160}
-                  height={124}
-                  loading="lazy"
-                />
+          {credentials.map((cert) => {
+            const body = (
+              <>
+                <div className="cert-thumb">
+                  <img
+                    src={`/certs/thumbs/${cert.slug}.png`}
+                    alt={`${cert.title} credential from ${cert.issuer}`}
+                    width={160}
+                    height={124}
+                    loading="lazy"
+                  />
+                </div>
+                <div>
+                  <span>{cert.status}</span>
+                  <h3>{cert.title}</h3>
+                  <p>{cert.issuer}</p>
+                  {cert.href ? <b>View credential ↗</b> : null}
+                </div>
+              </>
+            );
+
+            return cert.href ? (
+              <a
+                className="cert-card"
+                key={cert.slug}
+                href={cert.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {body}
+              </a>
+            ) : (
+              <div className="cert-card cert-card-static" key={cert.slug}>
+                {body}
               </div>
-              <div>
-                <span>{cert.status}</span>
-                <h3>{cert.title}</h3>
-                <p>{cert.issuer}</p>
-                <b>View credential ↗</b>
-              </div>
-            </a>
-          ))}
+            );
+          })}
         </div>
+        <a
+          className="cert-linkedin"
+          href={socialLinks.linkedin}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View all credentials on LinkedIn ↗
+        </a>
       </section>
       <Footer />
     </main>

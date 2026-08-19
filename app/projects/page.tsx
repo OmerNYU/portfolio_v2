@@ -1,8 +1,8 @@
 import { Footer, Header, PageIntro } from "../components";
 import { ProjectVisual } from "../components/project-visuals/ProjectVisual";
 import {
-  completedProjects,
   matchlensProject,
+  selectedProjects,
   techLine,
 } from "../projects-data";
 
@@ -13,17 +13,26 @@ export default function Projects() {
       <PageIntro
         kicker="PROJECTS"
         title="Projects"
-        copy="Completed projects and current work."
+        copy="Selected projects and current work."
       />
       <section className="project-catalog">
-        <h2>Completed projects</h2>
+        <h2>Selected projects</h2>
         <div className="catalog-grid">
-          {completedProjects.map((project) => (
+          {selectedProjects.map((project) => (
             <article className="catalog-card" key={project.name}>
               <ProjectVisual project={project.visualKey} variant="card" />
               <div className="catalog-card-body">
                 <h3>{project.name}</h3>
                 <p>{project.desc}</p>
+                {project.role ? (
+                  <dl className="project-role">
+                    <dt>My role</dt>
+                    <dd>{project.role}</dd>
+                  </dl>
+                ) : null}
+                {project.evidence ? (
+                  <p className="project-evidence">{project.evidence}</p>
+                ) : null}
                 <div className="tech-spec">
                   <b>Built with</b>
                   <span>{techLine(project.technologies)}</span>

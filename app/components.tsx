@@ -20,7 +20,7 @@ export function Header() {
     </Link>
     <nav aria-label="Primary navigation">
       <Link href="/projects">Projects</Link><Link href="/experience">Experience</Link>
-      <Link href="/writing">Writing</Link><Link href="/notes">Notes</Link>
+      <Link href="/writing">Writing</Link>
     </nav>
     <a className="contact-pill" href="/Omer_Hayat_Resume.pdf" target="_blank" rel="noreferrer">Résumé <span>↗</span></a>
   </header>;

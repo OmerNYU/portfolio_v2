@@ -7,14 +7,17 @@ export default function Writing() {
       <PageIntro
         kicker="THE EPOCH"
         title="Articles and newsletter"
-        copy="Technical writing on machine learning, systems, and software."
+        copy="Technical writing on machine learning, systems, and software. 500+ subscribers."
       />
       <section className="publication-hero">
         <div className="epoch-big">E</div>
         <div>
           <p>ML · SYSTEMS · SOFTWARE</p>
           <h2>The Epoch</h2>
-          <p>Articles and notes on machine learning, systems, and software.</p>
+          <p>
+            Technical writing on machine learning, systems, and software. 500+
+            subscribers.
+          </p>
           <div className="publication-actions">
             <a
               href="https://epoch.hashnode.dev/"

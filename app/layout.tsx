@@ -3,9 +3,9 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Omer Hayat | AI/ML Engineer",
+  title: "Omer Hayat | Software & ML Systems",
   description:
-    "Projects, experience, technical writing, and learning notes from Omer Hayat.",
+    "CS student at NYU Abu Dhabi building software, ML systems, robotics, and cloud infrastructure.",
   other: {
     "codex-preview": "development",
   },

@@ -110,6 +110,10 @@
   animation: project-visual-grow 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.project-visual--internshipmonitor {
+  --project-accent: #38bdf8;
+}
+
 .project-visual--pitchmirror {
   --project-accent: #a78bfa;
 }

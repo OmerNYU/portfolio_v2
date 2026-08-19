@@ -1,4 +1,5 @@
 export type ProjectVisualKey =
+  | "internshipmonitor"
   | "pitchmirror"
   | "repotriage"
   | "failspec"
@@ -13,48 +14,33 @@ export type ProjectCard = {
   technologies: string[];
   visualKey: ProjectVisualKey;
   githubUrl: string;
+  evidence?: string;
+  role?: string;
 };
 
 export function techLine(technologies: string[]) {
   return technologies.join(" · ");
 }
 
-export const featuredHomeProjects: ProjectCard[] = [
+export const selectedProjects: ProjectCard[] = [
   {
-    name: "RepoTriage",
-    label: "ML SYSTEMS · DEVELOPER TOOLS",
-    desc: "A confidence-aware GitHub issue intelligence system that predicts labels, retrieves similar issues, abstains when uncertain, and records maintainer feedback.",
+    name: "Internship Monitor",
+    label: "ML SYSTEMS · BACKEND · AUTOMATION",
+    desc: "An internship-intelligence pipeline that discovers live roles, evaluates likely eligibility, adds optional local LLM intelligence, and safely queues explainable alerts.",
     technologies: [
       "Python",
-      "FastAPI",
-      "scikit-learn",
-      "Next.js",
-      "TypeScript",
-      "PostgreSQL",
-      "SQLAlchemy",
-      "Docker",
+      "AsyncIO",
+      "SQLite",
+      "Qwen",
+      "Ollama",
+      "RAG",
+      "GitHub Actions",
     ],
-    visualKey: "repotriage",
-    githubUrl: "https://github.com/OmerNYU/repotriage",
+    visualKey: "internshipmonitor",
+    githubUrl: "https://github.com/OmerNYU/Internship-Monitor",
+    evidence:
+      "2,800+ listings · 15 sources · 70-case human review · 221+ automated tests",
   },
-  {
-    name: "FailSpec",
-    label: "OPENAI BUILD WEEK · DEVELOPER TOOLS",
-    desc: "Built by a three-person team during OpenAI Build Week 2026, FailSpec is a local-first developer tool that converts React and Next.js bug reports into evidence-backed Playwright regression tests.",
-    technologies: [
-      "TypeScript",
-      "React",
-      "Node.js",
-      "Express.js",
-      "Playwright",
-      "OpenAI Codex",
-    ],
-    visualKey: "failspec",
-    githubUrl: "https://github.com/OmerNYU/FailSpec",
-  },
-];
-
-export const completedProjects: ProjectCard[] = [
   {
     name: "RepoTriage",
     label: "ML system + developer tool",
@@ -74,22 +60,24 @@ export const completedProjects: ProjectCard[] = [
   },
   {
     name: "FailSpec",
-    label: "AI developer tool · Build Week 2026",
-    desc: "Built by a three-person team during OpenAI Build Week 2026, FailSpec is a local-first developer tool that converts React and Next.js bug reports into evidence-backed Playwright regression tests.",
+    label: "DEVELOPER TOOLS · TESTING",
+    desc: "A local-first developer tool that turns bug reports into evidence-backed Playwright regression tests through isolated execution and deterministic verification.",
     technologies: [
       "TypeScript",
       "React",
-      "Node.js",
       "Express.js",
       "Playwright",
       "OpenAI Codex",
     ],
     visualKey: "failspec",
     githubUrl: "https://github.com/OmerNYU/FailSpec",
+    evidence:
+      "286 tests · isolated Git worktrees · controlled Playwright execution · deterministic verification",
+    role: "Platform architecture & backend orchestration",
   },
   {
     name: "PitchMirror",
-    label: "AI product on AWS",
+    label: "AWS · MULTIMODAL AI",
     desc: "A multimodal presentation coach that turns recorded pitches into structured feedback on voice, presence, and content.",
     technologies: [
       "Next.js",
@@ -101,6 +89,9 @@ export const completedProjects: ProjectCard[] = [
     ],
     visualKey: "pitchmirror",
     githubUrl: "https://github.com/OmerNYU/PitchMirror",
+    evidence:
+      "Thousands of frames → 5 keyframes · Step Functions → ECS Fargate → Bedrock · idempotent execution",
+    role: "Solo build",
   },
   {
     name: "Kaboom",
@@ -125,6 +116,22 @@ export const completedProjects: ProjectCard[] = [
     githubUrl: "https://github.com/OmerNYU/Shell_C",
   },
 ];
+
+const featuredHomeNames = [
+  "Internship Monitor",
+  "FailSpec",
+  "PitchMirror",
+] as const;
+
+export const featuredHomeProjects: ProjectCard[] = featuredHomeNames.map(
+  (name) => {
+    const project = selectedProjects.find((item) => item.name === name);
+    if (!project) {
+      throw new Error(`Missing featured project: ${name}`);
+    }
+    return project;
+  },
+);
 
 export const matchlensProject = {
   name: "MatchLens",

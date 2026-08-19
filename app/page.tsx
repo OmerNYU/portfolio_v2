@@ -5,14 +5,47 @@ import {
   featuredHomeProjects,
   matchlensProject,
   techLine,
+  type ProjectCard,
 } from "./projects-data";
 
-const capabilityGroups = [
-  ["Machine learning", "PyTorch · scikit-learn · TensorFlow · pandas · NumPy"],
-  ["Software systems & robotics", "FastAPI · React · TypeScript · SQLAlchemy · Docker · ROS 2"],
-  ["Cloud & tooling", "AWS · GitHub Actions · PostgreSQL · Linux · Git"],
-  ["Languages", "Python · C++ · TypeScript · JavaScript · C"],
+const proofMetrics = [
+  ["90%+", "robot nav", "success"],
+  ["2,800+", "listings", "processed"],
+  ["286", "tests", "in FailSpec"],
+  ["500+", "subscribers", "The Epoch"],
 ];
+
+const capabilityGroups = [
+  [
+    "Machine learning",
+    "PyTorch · scikit-learn · Hugging Face · PEFT/QLoRA · RAG · pandas",
+  ],
+  [
+    "Software systems",
+    "FastAPI · Node.js · Express.js · Fastify · React · Next.js · SQLAlchemy · PostgreSQL",
+  ],
+  [
+    "Cloud, robotics & tooling",
+    "AWS · Docker · Linux · ROS 2 · GitHub Actions · Playwright · Git",
+  ],
+  ["Languages", "Python · TypeScript/JavaScript · C++ · SQL"],
+];
+
+function ProjectMeta({ project }: { project: ProjectCard }) {
+  return (
+    <>
+      {project.role ? (
+        <dl className="project-role">
+          <dt>My role</dt>
+          <dd>{project.role}</dd>
+        </dl>
+      ) : null}
+      {project.evidence ? (
+        <p className="project-evidence">{project.evidence}</p>
+      ) : null}
+    </>
+  );
+}
 
 export default function Home() {
   return (
@@ -21,9 +54,9 @@ export default function Home() {
       <section className="hero hero-text-only" id="top">
         <div className="hero-copy">
           <h1>
-            Aspiring <span className="blue-word">AI/ML</span>
+            SOFTWARE &amp; <span className="blue-word">ML</span>
             <br />
-            engineer<span className="red-dot">.</span>
+            SYSTEMS<span className="red-dot">.</span>
           </h1>
           <p className="tagline">
             Building one <mark>epoch</mark> at a time.
@@ -36,7 +69,10 @@ export default function Home() {
               width={84}
               height={84}
             />
-            <span>Computer Science at New York University Abu Dhabi</span>
+            <span>
+              CS @ NYU Abu Dhabi · Robotics &amp; ML Research @ iCAS Lab · AWS
+              AI &amp; ML Scholar
+            </span>
           </p>
           <div className="hero-actions">
             <Link className="primary-action" href="/projects">
@@ -49,12 +85,15 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="capability-strip">
-        <div className="strip-title">WHAT I WORK WITH</div>
-        {capabilityGroups.map(([title, items]) => (
-          <div className="capability-item" key={title}>
-            <b>{title}</b>
-            <span>{items}</span>
+      <section className="proof-strip" aria-label="Selected results">
+        {proofMetrics.map(([value, lineOne, lineTwo]) => (
+          <div className="proof-item" key={value}>
+            <strong>{value}</strong>
+            <span>
+              {lineOne}
+              <br />
+              {lineTwo}
+            </span>
           </div>
         ))}
       </section>
@@ -72,6 +111,7 @@ export default function Home() {
                 <span>{project.label}</span>
                 <h3>{project.name}</h3>
                 <p>{project.desc}</p>
+                <ProjectMeta project={project} />
                 <small>{techLine(project.technologies)}</small>
                 <a
                   className="case-link"
@@ -85,6 +125,34 @@ export default function Home() {
               </div>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="section experience-preview">
+        <div className="plain-heading">
+          <h2>Experience.</h2>
+          <Link href="/experience">View all experience ↗</Link>
+        </div>
+        <div className="experience-preview-grid">
+          <article>
+            <span>iCAS Lab</span>
+            <h3>Robotics &amp; ML Research Assistant</h3>
+            <small>NYU Abu Dhabi · Aug. 2025–Present</small>
+            <p>
+              Semantic navigation and VLA systems for the Unitree Go2, with
+              90%+ physical navigation success across approximately 25
+              spoken-command trials.
+            </p>
+          </article>
+          <article>
+            <span>Enrichly · Techstars &apos;23</span>
+            <h3>Software Engineer Intern</h3>
+            <small>Feb. 2025–Jun. 2025</small>
+            <p>
+              Owned core frontend flows for an early production AI chatbot and
+              built a structured 15-scenario LLM evaluation harness.
+            </p>
+          </article>
         </div>
       </section>
 
@@ -118,23 +186,24 @@ export default function Home() {
         </article>
       </section>
 
-      <section className="section home-links">
-        <Link href="/experience">
-          <span>EXPERIENCE</span>
-          <h3>Research, software, data &amp; AI work.</h3>
-          <b>Explore ↗</b>
-        </Link>
+      <section className="section home-epoch">
         <Link href="/writing">
           <span>THE EPOCH</span>
           <h3>Articles about ML, systems, and what finally clicked.</h3>
           <b>Read ↗</b>
         </Link>
-        <Link href="/notes">
-          <span>READING &amp; NOTES</span>
-          <h3>Books, concepts, and learning trails.</h3>
-          <b>Browse ↗</b>
-        </Link>
       </section>
+
+      <section className="capability-strip">
+        <div className="strip-title">WHAT I WORK WITH</div>
+        {capabilityGroups.map(([title, items]) => (
+          <div className="capability-item" key={title}>
+            <b>{title}</b>
+            <span>{items}</span>
+          </div>
+        ))}
+      </section>
+
       <Footer />
     </main>
   );
